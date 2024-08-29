@@ -1,0 +1,558 @@
+/* Remove these lines */
+/* @import url("https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"); */
+/* @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css"); */
+
+:root {
+  --primary-blue: #0087d2;
+  --primary-purple: #6561ac;
+  --dark-gray: #292526;
+  --accent-red: #cd004b;
+  --accent-orange: #f37023;
+  --accent-yellow: #fcb711;
+  --accent-green: #0eb24e;
+  
+  --page-bg: #F7F7F7;
+  --content-bg: #F7F7F7;
+  --nav-bg: #FFFFFF;
+  --primary-text: var(--dark-gray);
+  --secondary-text: #888888;
+  --active-tab-bg: #E5F3FF;
+  --active-tab-text: var(--primary-blue);
+  --inactive-tab-text: var(--dark-gray);
+  --search-bar-bg: #E9ECEF;
+  --search-bar-border: #CED4DA;
+}
+
+body {
+  font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background-color: var(--page-bg);
+  color: var(--primary-text);
+  font-size: 15px;
+}
+
+.sidebar {
+  width: 80px;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  background-color: var(--nav-bg);
+  box-shadow: none;
+  border-right: 1px solid #DEE2E6;
+  padding: 0;
+}
+
+.sidebar-content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 0; /* Remove top padding */
+}
+
+.sidebar .nav-link {
+  width: 100%;
+  padding: 12px 0; /* Reduce vertical padding */
+  text-align: center;
+  color: var(--primary-text);
+  position: relative;
+  transition: background-color 0.3s ease;
+}
+
+.sidebar .nav-link:hover::before,
+.sidebar .nav-link.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background-color: var(--primary-blue);
+}
+
+.sidebar .nav-link:hover {
+  background-color: rgba(0, 135, 210, 0.1);
+}
+
+.sidebar .nav-link.active {
+  background-color: var(--active-tab-bg);
+  color: var(--active-tab-text);
+}
+
+.sidebar .nav-link.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background-color: var(--primary-blue);
+}
+
+.sidebar .nav-link i {
+  font-size: 1.6rem;
+  color: var(--dark-gray);
+}
+
+.sidebar .nav-link.active i {
+  color: var(--primary-blue);
+}
+
+.nav-tooltip {
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #000;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 14px;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+}
+
+.nav-tooltip::before {
+  content: '';
+  position: absolute;
+  right: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent #000 transparent transparent;
+}
+
+.sidebar .nav-link:hover .nav-tooltip {
+  opacity: 1;
+  visibility: visible;
+}
+
+main {
+  margin-left: 80px;
+  width: calc(100% - 80px);
+  padding: 0 20px 20px; /* Remove top padding */
+  min-height: 100vh;
+  background-color: var(--content-bg);
+}
+
+.content-area {
+  background-color: var(--content-bg);
+  padding: 20px;
+  border-radius: 8px;
+  min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 500;
+  font-size: 19px;
+}
+
+.table th {
+  font-weight: 500;
+  color: var(--secondary-text);
+  font-size: 12px;
+  text-transform: uppercase;
+  padding: 12px 16px;
+  border-bottom: 2px solid #e9ecef;
+}
+
+.table td {
+  font-size: 15px; /* Keep the original font size for table data */
+  padding: 20px;
+  vertical-align: middle;
+}
+
+.table tbody tr {
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.table tbody tr:hover,
+.table tbody tr.selected {
+  background-color: rgba(0, 135, 210, 0.1) !important;
+}
+
+.search-bar {
+  width: 100%;
+  background-color: var(--search-bar-bg);
+  border-color: var(--search-bar-border);
+  border-radius: 4px;
+  transition: box-shadow 0.3s ease;
+  padding: 1rem; /* Adjust padding */
+  font-size: 16px;
+  height: auto;
+}
+
+.search-bar:focus {
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 0 0.2rem rgba(0, 135, 210, 0.25);
+}
+
+.search-bar::placeholder {
+  font-style: italic;
+  color: rgba(160, 160, 160, 0.6); /* Lighter grey color with 60% opacity */
+}
+
+/* For Internet Explorer */
+.search-bar:-ms-input-placeholder {
+  font-style: italic;
+  color: rgba(160, 160, 160, 0.6);
+}
+
+/* For Microsoft Edge */
+.search-bar::-ms-input-placeholder {
+  font-style: italic;
+  color: rgba(160, 160, 160, 0.6);
+}
+
+.nav-pills .nav-link {
+  color: var(--primary-purple);
+  background-color: transparent;
+  border: 1px solid var(--primary-purple);
+  margin-right: 10px;
+  border-radius: 20px;
+  padding: 5px 15px;
+  transition: all 0.3s ease;
+}
+
+.nav-pills .nav-link:hover {
+  background-color: rgba(101, 97, 172, 0.1);
+}
+
+.nav-pills .nav-link.active {
+  color: white;
+  background-color: var(--primary-purple);
+}
+
+.dashboard-card {
+  background-color: #FFFFFF;
+  border-radius: 16px; /* Increased border radius for more rounded corners */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15); /* Increased shadow for more visibility */
+  overflow: hidden;
+  padding: 20px;
+}
+
+.dashboard-card .card-header {
+  padding-top: 20px;
+  padding-bottom: 0;
+}
+
+.dashboard-card .card-body {
+  padding: 20px;
+}
+
+.simple-tabs-container {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.simple-tabs {
+  width: 300px;
+  display: flex;
+  border: 1px solid var(--primary-purple);
+  border-radius: 8px; /* Reduced border radius to match the container */
+  overflow: hidden;
+}
+
+.tab-button {
+  background-color: white;
+  color: var(--primary-purple);
+  border: none;
+  padding: 8px 0;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  font-size: 14px;
+  font-weight: 500;
+  flex-grow: 1;
+}
+
+.tab-button:first-child {
+  flex-grow: 2;
+  border-top-left-radius: 8px; /* Adjusted to match the container */
+  border-bottom-left-radius: 8px; /* Adjusted to match the container */
+}
+
+.tab-button:last-child {
+  border-top-right-radius: 8px; /* Adjusted to match the container */
+  border-bottom-right-radius: 8px; /* Adjusted to match the container */
+}
+
+.tab-button:not(:last-child) {
+  border-right: 1px solid var(--primary-purple);
+}
+
+.tab-button.active {
+  background-color: var(--primary-purple);
+  color: white;
+}
+
+.badge-recordkeeper,
+.status-badge {
+  font-size: 12px;
+  font-weight: normal; /* Ensure the font is not bold */
+  padding: 6px 12px; /* Increased padding top and bottom */
+  border-radius: 25px;
+  display: inline-block;
+  line-height: 1.5;
+  white-space: nowrap;
+  text-align: left; /* Ensure text inside badge is left-aligned */
+  color: #ffffff !important; /* Ensure text is always white for contrast */
+}
+
+/* Remove these specific color classes */
+/* .badge-recordkeeper.bg-primary { background-color: #0087d2 !important; color: #ffffff !important; }
+.badge-recordkeeper.bg-success { background-color: #0eb24e !important; color: #ffffff !important; }
+.badge-recordkeeper.bg-danger { background-color: #cd004b !important; color: #ffffff !important; }
+.badge-recordkeeper.bg-warning { background-color: #f37023 !important; color: #ffffff !important; } */
+
+.status-badge.bg-success { background-color: #0eb24e !important; color: #ffffff !important; }
+.status-badge.bg-secondary { background-color: #6561ac !important; color: #ffffff !important; }
+
+.dashboard-card .table tbody td {
+  font-size: 14px;
+  padding: 20px 20px 20px 0; /* Remove left padding */
+  vertical-align: middle;
+  border-top: 1px solid #e9ecef;
+  background-color: transparent !important;
+  border-radius: 0; /* Explicitly set to 0 */
+}
+
+/* Adjust padding for the first column to maintain some space from the left edge */
+.dashboard-card .table tbody td:first-child {
+  padding-left: 20px;
+}
+
+.dashboard-card .table tbody td .badge-recordkeeper,
+.dashboard-card .table tbody td .status-badge {
+  font-size: 12px;
+  font-weight: normal; /* Ensure the font is not bold */
+  padding: 6px 12px; /* Increased padding top and bottom */
+  border-radius: 25px;
+}
+
+.action-icons .btn-link {
+  color: var(--primary-purple);
+  font-size: 1.3rem;
+  padding: 0.25rem 0.5rem;
+}
+
+.action-icons .btn-link:hover {
+  color: var(--primary-blue);
+}
+
+.sidebar-footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 0;
+}
+
+.sidebar-footer .nav-item {
+  list-style-type: none;
+}
+
+.dashboard-card .table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.dashboard-card .table th,
+.dashboard-card .table td {
+  padding: 12px 16px 12px 0; /* Remove left padding */
+  vertical-align: middle;
+  text-align: left; /* Ensure left alignment */
+}
+
+.dashboard-card .table th:first-child,
+.dashboard-card .table td:first-child {
+  padding-left: 20px; /* Add left padding only to the first column */
+}
+
+.dashboard-card .table th .d-flex {
+  padding-left: 0; /* Ensure no left padding on the flex container */
+}
+
+.dashboard-card .table th {
+  font-weight: 500;
+  color: var(--secondary-text);
+  font-size: 12px;
+  text-transform: uppercase;
+  border-bottom: 2px solid #e9ecef;
+}
+
+.dashboard-card .table th .d-flex {
+  display: flex !important;
+  align-items: center;
+}
+
+.dashboard-card .table th .sort-icon {
+  margin-left: 4px;
+}
+
+/* Remove any center alignment for specific columns */
+.dashboard-card .table td.text-center,
+.dashboard-card .table th.text-center {
+  text-align: left;
+}
+
+/* Override Bootstrap's table hover styles */
+.table-hover tbody tr:hover,
+.table-hover tbody tr:hover td,
+.table tbody tr:hover,
+.table tbody tr:hover td {
+  background-color: transparent !important;
+}
+
+/* Update our custom hover styles */
+.dashboard-card .table tbody tr {
+  transition: background-color 0.3s ease;
+}
+
+.dashboard-card .table tbody tr:hover,
+.dashboard-card .table tbody tr:hover td,
+.dashboard-card .table tbody tr.selected,
+.dashboard-card .table tbody tr.selected td {
+  background-color: #E5F3FF !important; /* Changed to #E5F3FF */
+}
+
+.dashboard-card .table tbody tr:hover td:first-child,
+.dashboard-card .table tbody tr.selected td:first-child {
+  position: relative;
+}
+
+.dashboard-card .table tbody tr:hover td:first-child::before,
+.dashboard-card .table tbody tr.selected td:first-child::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background-color: #0387D2; /* Changed to #0387D2 */
+}
+
+/* Ensure table cells have a transparent background */
+.dashboard-card .table td {
+  background-color: transparent !important;
+}
+
+.dashboard-card .table th {
+  cursor: pointer;
+}
+
+.dashboard-card .table th .sort-icon {
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out, color 0.2s ease-in-out;
+  color: var(--secondary-text); /* Default color */
+}
+
+.dashboard-card .table th:hover .sort-icon {
+  opacity: 1;
+  color: var(--primary-purple); /* Change to purple on hover */
+}
+
+.dashboard-card .table th .sort-icon i {
+  font-size: 0.8em;
+  vertical-align: middle;
+}
+
+/* Style for active sort column */
+.dashboard-card .table th.active-sort .sort-icon {
+  opacity: 1;
+  color: var(--primary-purple); /* Keep purple for active sort */
+}
+
+.pagination-container {
+  font-size: 14px;
+}
+
+.pagination-container .btn-outline-primary {
+  color: var(--dark-gray);
+  border-color: var(--dark-gray);
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  padding: 0.25rem 0.5rem; /* Reduced padding */
+  font-size: 14px; /* Reduced font size */
+  line-height: 1; /* Ensure consistent line height */
+  height: auto;
+}
+
+.pagination-container .btn-outline-primary:focus,
+.pagination-container .btn-outline-primary:hover {
+  border-color: var(--dark-gray);
+  box-shadow: 0 0 0 0.2rem rgba(41, 37, 38, 0.25); /* Dark gray with opacity */
+}
+
+.pagination-container .btn-outline-primary:hover:not(:disabled) {
+  background-color: var(--dark-gray);
+  color: white;
+}
+
+.pagination-container .btn-outline-primary:disabled {
+  color: #6c757d;
+  border-color: #6c757d;
+}
+
+.pagination-container .btn-outline-primary i {
+  font-size: 0.8rem;
+}
+
+.pagination-container .page-info {
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.pt-3 {
+    padding-top: .5rem !important;
+}
+
+.dashboard-header.pt-3 {
+    padding-top: .5rem !important;
+}
+
+.form-control {
+    display: block;
+    width: 100%;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 0.25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.form-control.search-bar {
+  padding: 1rem; /* Ensure this padding is applied */
+}
+
+.dashboard-header {
+  padding-top: 1rem; /* Add padding to the top of the dashboard header */
+}
+
+/* Add these new styles */
+.dashboard-card .table td.text-center {
+  text-align: center;
+}
+
+.dashboard-card .table td.text-center .badge-recordkeeper,
+.dashboard-card .table td.text-center .status-badge {
+  display: inline-block;
+  min-width: 80px; /* Adjust this value as needed */
+}
+
+.plans-title {
+  margin-top: -2px; /* Move the title up by 2 pixels */
+}
